@@ -6,7 +6,6 @@ public class Alamat {
 
     public Alamat(String jalan, String dusun, String desa, String kecamatan, String kota, String provinsi, int no_Jalan) {
         Jalan = jalan;
-        Dusun = dusun;
         Desa = desa;
         Kecamatan = kecamatan;
         Kota = kota;
@@ -15,6 +14,6 @@ public class Alamat {
     }
 
     void TampilkanAlamat(){
-        System.out.println();
+        System.out.println("jl."+ Jalan + "no" + No_Jalan +"Dsn"+ Dusun +"Ds" +Desa +"Kec"+ Kecamatan +"Kota"+Kota);
     }
 }
