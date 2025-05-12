@@ -4,8 +4,6 @@ public class Sekolah {
 
     public Sekolah(Long NIS, Long NPSN, String nama, String status_Akreditasi, String no_Tlp, String e_mail, String website ) {
         this.Nama= nama;
-        this.NIS = 0L;
-        this.NPSN = NPSN;
         this.Status_Akreditasi = status_Akreditasi;
         this.No_Tlp = no_Tlp;
         this.E_mail = e_mail;
