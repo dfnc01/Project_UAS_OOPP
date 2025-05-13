@@ -12,11 +12,12 @@ public class Main {
         System.out.print("Masukkan pilihan Anda (1/2/3): ");
         int pilihan = scanner.nextInt();
 
-        String url = "jdbc:sqlite:C:/Users/RMHYPS/Documents/KULIAH/OOP/PRAKTIKUM/PROJEK/Project_UAS_OOPP/src/datapegawai.db";
+        String url = "jdbc:sqlite:C:\\Users\\dian\\IdeaProjects\\Project_UAS_OOPP\\src\\datapegawai.db";
 
         try (Connection conn = DriverManager.getConnection(url)) {
             switch (pilihan) {
                 case 1:
+
                     System.out.println("Anda memilih Pengajar.");
                     System.out.println("Pilih jenis Pengajar:");
                     System.out.println("1. Guru Honorer");
