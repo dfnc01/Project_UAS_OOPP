@@ -3,7 +3,7 @@ public class Sekolah {
     private long NIS, NPSN ;
 
     public Sekolah(Long NIS, Long NPSN, String nama, String status_Akreditasi, String no_Tlp, String e_mail, String website ) {
-        this.Nama= nama;
+        this.Nama = nama;
         this.Status_Akreditasi = status_Akreditasi;
         this.No_Tlp = no_Tlp;
         this.E_mail = e_mail;
