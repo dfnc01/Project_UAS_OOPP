@@ -12,7 +12,7 @@ public class Main {
         System.out.print("Masukkan pilihan Anda (1/2/3): ");
         int pilihan = scanner.nextInt();
 
-        String url = "jdbc:sqlite:C:/Users/RMHYPS/Documents/KULIAH/OOP/PRAKTIKUM/PROJEK/Project_UAS_OOPP/src/ProfilSekolah.db";
+        String url = "jdbc:sqlite:C:/Users/RMHYPS/Documents/KULIAH/OOP/PRAKTIKUM/PROJEK/Project_UAS_OOPP/src/datapegawai.db";
 
         try (Connection conn = DriverManager.getConnection(url)) {
             switch (pilihan) {
