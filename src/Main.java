@@ -40,17 +40,43 @@ public class Main {
                         }
                     } else if (pilihanPengajar == 2) {
                         System.out.println("Anda memilih Guru PNS.");
-                        String sql = "SELECT nama FROM datapegawai WHERE jabatan = 'Guru PNS'";
+                        String sql = "SELECT * FROM datapegawai WHERE jabatan = 'Guru PNS'";
                         Statement stmt = conn.createStatement();
                         ResultSet rs = stmt.executeQuery(sql);
+
+                        // Simpan nama dan id ke list
+                        java.util.List<String> namaList = new java.util.ArrayList<>();
+                        java.util.List<Integer> idList = new java.util.ArrayList<>();
+                        int nomor = 1;
                         System.out.println("Daftar Guru PNS:");
-                        boolean found = false;
                         while (rs.next()) {
-                            System.out.println("- " + rs.getString("nama"));
-                            found = true;
+                            System.out.println(nomor + ".1 " + rs.getString("nama"));
+                            namaList.add(rs.getString("nama"));
+                            idList.add(rs.getInt("id"));
+                            nomor++;
                         }
-                        if (!found) {
+                        if (namaList.isEmpty()) {
                             System.out.println("Tidak ada Guru PNS di database.");
+                        } else {
+                            System.out.print("Pilih nomor Guru PNS: ");
+                            int pilihNama = scanner.nextInt();
+                            if (pilihNama < 1 || pilihNama > namaList.size()) {
+                                System.out.println("Pilihan tidak valid.");
+                            } else {
+                                int idTerpilih = idList.get(pilihNama - 1);
+                                String sqlDetail = "SELECT * FROM datapegawai WHERE id = ?";
+                                PreparedStatement pstmt = conn.prepareStatement(sqlDetail);
+                                pstmt.setInt(1, idTerpilih);
+                                ResultSet rsDetail = pstmt.executeQuery();
+                                if (rsDetail.next()) {
+                                    System.out.println("Detail Guru PNS:");
+                                    System.out.println("Nama      : " + rsDetail.getString("nama"));
+                                    System.out.println("No. Tlp   : " + rsDetail.getString("no_Tlp"));
+                                    System.out.println("Email     : " + rsDetail.getString("e_mail"));
+                                    System.out.println("ID Petugas: " + rsDetail.getString("id_Petugas"));
+                                    System.out.println("Jabatan   : " + rsDetail.getString("jabatan"));
+                                }
+                            }
                         }
                     } else {
                         System.out.println("Pilihan tidak valid.");
