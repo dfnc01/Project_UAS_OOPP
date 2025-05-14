@@ -1,4 +1,5 @@
 import Support_Class_.Alamat;
+import Support_Class_.DataBase;
 import java.text.*;
 import java.util.*;
 
@@ -18,7 +19,6 @@ public class Main {
         System.out.print("Masukkan pilihan (1/2/3): ");
         int JenisPekerjaan = scanner.nextInt();
 
-
         switch (JenisPekerjaan) {
             case 1:
                 System.out.println("Memilih Pengajar.");
@@ -29,17 +29,51 @@ public class Main {
                 int pilihanPengajar = scanner.nextInt();
 
                 if (pilihanPengajar == 1) {
-                    System.out.println("Memilih Guru Honorer.");
+                    List<Map<String, String>> daftarGuru = DataBase.getDaftarPegawaiByJabatan("Guru Honorer");
+                    for (int i = 0; i < daftarGuru.size(); i++) {
+                        System.out.println((i + 1) + ". " + daftarGuru.get(i).get("nama"));
+                    }
+                    System.out.print("Pilih nomor Guru Honorer: ");
+                    int pilih = scanner.nextInt();
+                    Map<String, String> guru = daftarGuru.get(pilih - 1);
+                    System.out.println("Data Pegawai:");
+                    System.out.println("Nama: " + guru.get("nama"));
+                    System.out.println("Email: " + guru.get("email"));
+                    System.out.println("No Tlp: " + guru.get("no_telp"));
+                    System.out.println("Jabatan: " + guru.get("jabatan"));
                     System.out.print("Masukkan jumlah pertemuan: ");
                     int jumlahPertemuan = scanner.nextInt();
-                    GuruHonorer guruHonorer = new GuruHonorer("Hanif", "08222", "Hanif@gmail.com", "GH001", "Guru Honorer");
+                    GuruHonorer guruHonorer = new GuruHonorer(
+                        guru.get("nama"),
+                        guru.get("no_telp"),
+                        guru.get("email"),
+                        guru.get("id_petugas"),
+                        guru.get("jabatan")
+                    );
                     double totalGaji = guruHonorer.HitungGaji(jumlahPertemuan);
                     System.out.println("Total gaji Guru Honorer: Rp" + formatuang.format(totalGaji));
                 } else if (pilihanPengajar == 2) {
-                    System.out.println("Memilih Guru PNS.");
+                    List<Map<String, String>> daftarGuru = DataBase.getDaftarPegawaiByJabatan("Guru PNS");
+                    for (int i = 0; i < daftarGuru.size(); i++) {
+                        System.out.println((i + 1) + ". " + daftarGuru.get(i).get("nama"));
+                    }
+                    System.out.print("Pilih nomor Guru PNS: ");
+                    int pilih = scanner.nextInt();
+                    Map<String, String> guru = daftarGuru.get(pilih - 1);
+                    System.out.println("Data Pegawai:");
+                    System.out.println("Nama: " + guru.get("nama"));
+                    System.out.println("Email: " + guru.get("email"));
+                    System.out.println("No Tlp: " + guru.get("no_telp"));
+                    System.out.println("Jabatan: " + guru.get("jabatan"));
                     System.out.print("Masukkan jumlah hari: ");
                     int jumlahHari = scanner.nextInt();
-                    GuruPNS guruPNS = new GuruPNS("Hanif", "0822", "Hanif@gmail.com", "GP001", "Guru PNS");
+                    GuruPNS guruPNS = new GuruPNS(
+                        guru.get("nama"),
+                        guru.get("no_telp"),
+                        guru.get("email"),
+                        guru.get("id_petugas"),
+                        guru.get("jabatan")
+                    );
                     double totalGaji = guruPNS.HitungGaji(jumlahHari);
                     System.out.println("Total gaji Guru PNS: Rp" + formatuang.format(totalGaji));
                 } else {
