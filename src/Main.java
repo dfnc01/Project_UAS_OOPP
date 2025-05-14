@@ -13,6 +13,7 @@ public class Main {
         System.out.print("Masukkan pilihan (1/2/3): ");
         int JenisPekerjaan = scanner.nextInt();
 
+<<<<<<< HEAD
         switch (JenisPekerjaan) {
             case 1:
                 System.out.println("Memilih Pengajar.");
@@ -40,6 +41,20 @@ public class Main {
                     System.out.println("Pilihan salah");
                 }
                 break;
+=======
+        String url = "jdbc:sqlite:C:\\Users\\dian\\IdeaProjects\\Project_UAS_OOPP\\src\\datapegawai.db";
+
+        try (Connection conn = DriverManager.getConnection(url)) {
+            switch (pilihan) {
+                case 1:
+
+                    System.out.println("Anda memilih Pengajar.");
+                    System.out.println("Pilih jenis Pengajar:");
+                    System.out.println("1. Guru Honorer");
+                    System.out.println("2. Guru PNS");
+                    System.out.print("Masukkan pilihan Anda (1/2): ");
+                    int pilihanPengajar = scanner.nextInt();
+>>>>>>> 4d67016fb20c48103b1f8956b1871e52519ae8dd
 
             case 2:
                 System.out.println("Memilih Keamanan.");
