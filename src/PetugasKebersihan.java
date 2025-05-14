@@ -1,9 +1,34 @@
-public class PetugasKebersihan extends Kebersihan {
+import Interfaces.Gaji;
+public class PetugasKebersihan extends Kebersihan implements Gaji {
+    private double gajiPokok = 3000000;
+    private double tunjangan = 1000000;
+    private double gajiPerHari = 80000;
+
     public PetugasKebersihan(String nama, String no_Tlp, String e_mail, String id_Petugas, String jabatan) {
         super(nama, no_Tlp, e_mail, id_Petugas, jabatan);
     }
 
-    public double hitungGaji(int jumlahHari) {
-        return 50000 * jumlahHari;
+    @Override
+    public double HitungGajiPokok() {
+        return gajiPokok;
+    }
+
+    @Override
+    public double HitungTunjangan() {
+        return tunjangan;
+    }
+
+    @Override
+    public double HitungGajiHarian() {
+        return gajiPerHari;
+    }
+
+    @Override
+    public double HitungGajiPertemuan() {
+        return 0; 
+    }
+
+    public double HitungGaji(int jumlahHari) {
+        return (gajiPerHari * jumlahHari);
     }
 }

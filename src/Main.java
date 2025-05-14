@@ -26,15 +26,15 @@ public class Main {
                     System.out.println("Memilih Guru Honorer.");
                     System.out.print("Masukkan jumlah pertemuan: ");
                     int jumlahPertemuan = scanner.nextInt();
-                    GuruHonorer guruHonorer = new GuruHonorer("Budi", "08123456789", "budi@gmail.com", "GH001", "Guru Honorer");
-                    double totalGaji = guruHonorer.hitungGaji(jumlahPertemuan);
+                    GuruHonorer guruHonorer = new GuruHonorer("Hanif", "08222", "Hanif@gmail.com", "GH001", "Guru Honorer");
+                    double totalGaji = guruHonorer.HitungGaji(jumlahPertemuan);
                     System.out.println("Total gaji Guru Honorer: Rp" + formatuang.format(totalGaji));
                 } else if (pilihanPengajar == 2) {
                     System.out.println("Memilih Guru PNS.");
                     System.out.print("Masukkan jumlah hari: ");
                     int jumlahHari = scanner.nextInt();
-                    GuruPNS guruPNS = new GuruPNS("Siti", "08198765432", "siti@gmail.com", "GP001", "Guru PNS");
-                    double totalGaji = guruPNS.hitungGaji(jumlahHari);
+                    GuruPNS guruPNS = new GuruPNS("Hanif", "0822", "Hanif@gmail.com", "GP001", "Guru PNS");
+                    double totalGaji = guruPNS.HitungGaji(jumlahHari);
                     System.out.println("Total gaji Guru PNS: Rp" + formatuang.format(totalGaji));
                 } else {
                     System.out.println("Pilihan salah");
@@ -53,8 +53,8 @@ public class Main {
                     System.out.print("Masukkan jumlah hari: ");
                     int jumlahHari = scanner.nextInt();
                     Satpam satpam = new Satpam("Hanif", "08222", "haha@gmail.com", "SP001", "Satpam");
-                    double totalGaji = satpam.hitungGaji(jumlahHari);
-                    System.out.println("Total gaji Satpam: Rp" + formatuang.format(totalGaji));  
+                    double totalGaji = satpam.HitungGaji(jumlahHari);
+                    System.out.println("Total gaji Satpam: Rp" + formatuang.format(totalGaji));
                 } else {
                     System.out.println("Pilihan salah");
                 }
@@ -73,14 +73,14 @@ public class Main {
                     System.out.print("Masukkan jumlah hari: ");
                     int jumlahHari = scanner.nextInt();
                     PetugasKebersihan petugasKebersihan = new PetugasKebersihan("Hahaha", "08222", "hahaha@gmail.com", "PK001", "Petugas Kebersihan");
-                    double totalGaji = petugasKebersihan.hitungGaji(jumlahHari);
+                    double totalGaji = petugasKebersihan.HitungGaji(jumlahHari);
                     System.out.println("Total gaji Petugas Kebersihan: Rp" + formatuang.format(totalGaji));
                 } else if (pilihanKebersihan == 2) {
                     System.out.println("Memilih Petugas Kebun.");
                     System.out.print("Masukkan jumlah hari: ");
                     int jumlahHari = scanner.nextInt();
                     PetugasKebun petugasKebun = new PetugasKebun("Hahaha", "08222", "hahaha@gmail.com", "PK001", "Petugas Kebun");
-                    double totalGaji = petugasKebun.hitungGaji(jumlahHari);
+                    double totalGaji = petugasKebun.HitungGaji(jumlahHari);
                     System.out.println("Total gaji Petugas Kebun: Rp" + formatuang.format(totalGaji));
                 } else {
                     System.out.println("Pilihan salah");
