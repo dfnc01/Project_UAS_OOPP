@@ -1,3 +1,4 @@
+import Support_Class_.Alamat;
 import java.text.*;
 import java.util.*;
 
@@ -6,12 +7,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         NumberFormat formatuang = NumberFormat.getInstance(new Locale("id", "ID"));
 
-        System.out.println("Pilih jenis pekerjaan:");
+        Alamat alamat = new Alamat("Gajayana ", 50, "Lowokwaru ", "Malang ", "Jawa Timur");
+        System.out.print("Alamat: ");
+        alamat.TampilkanAlamat();
+
+        System.out.println("\nPilih jenis pekerjaan:");
         System.out.println("1. Pengajar");
         System.out.println("2. Keamanan");
         System.out.println("3. Kebersihan");
         System.out.print("Masukkan pilihan (1/2/3): ");
         int JenisPekerjaan = scanner.nextInt();
+
 
         switch (JenisPekerjaan) {
             case 1:
