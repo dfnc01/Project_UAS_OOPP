@@ -1,0 +1,12 @@
+CREATE TABLE "datapegawaipns" (
+	"id"	INTEGER,
+	"Nama"	TEXT NOT NULL,
+	"no_Tlp"	NUMERIC,
+	"e_mail"	TEXT,
+	"id_Petugas"	TEXT,
+	"Jabatan"	TEXT,
+	PRIMARY KEY("id")
+);
+
+insert into datapegawaipns (id, Nama, no_Tlp, e_mail, id_Petugas, Jabatan) values
+(1, 'Asep', 1234567890, 'aa@', '1', 'Admin'),

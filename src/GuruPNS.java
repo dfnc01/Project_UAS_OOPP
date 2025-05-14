@@ -3,6 +3,11 @@ public class GuruPNS extends Pengajar {
         super(nama, no_Tlp, e_mail, id_Petugas, jabatan);
     }
 
+    public double hitungGaji(int jumlahHari) {
+        return 80000 * jumlahHari;
+    }
+
+
     @Override
     public String toString() {
         return "Nama: " + nama + ", No. Tlp: " + no_Tlp + ", Email: " + e_mail + ", ID Petugas: " + id_Petugas + ", Jabatan: " + jabatan;

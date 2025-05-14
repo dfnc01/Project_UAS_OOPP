@@ -1,160 +1,94 @@
-import java.sql.*;
-import java.util.Scanner;
+import java.text.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        NumberFormat formatuang = NumberFormat.getInstance(new Locale("id", "ID"));
 
         System.out.println("Pilih jenis pekerjaan:");
         System.out.println("1. Pengajar");
         System.out.println("2. Keamanan");
         System.out.println("3. Kebersihan");
-        System.out.print("Masukkan pilihan Anda (1/2/3): ");
-        int pilihan = scanner.nextInt();
+        System.out.print("Masukkan pilihan (1/2/3): ");
+        int JenisPekerjaan = scanner.nextInt();
 
-        String url = "jdbc:sqlite:C:/Users/RMHYPS/Documents/KULIAH/OOP/PRAKTIKUM/PROJEK/Project_UAS_OOPP/src/datapegawai.db";
+        switch (JenisPekerjaan) {
+            case 1:
+                System.out.println("Memilih Pengajar.");
+                System.out.println("Pilih jenis Pengajar:");
+                System.out.println("1. Guru Honorer");
+                System.out.println("2. Guru PNS");
+                System.out.print("Masukkan pilihan (1/2): ");
+                int pilihanPengajar = scanner.nextInt();
 
-        try (Connection conn = DriverManager.getConnection(url)) {
-            switch (pilihan) {
-                case 1:
-                    System.out.println("Anda memilih Pengajar.");
-                    System.out.println("Pilih jenis Pengajar:");
-                    System.out.println("1. Guru Honorer");
-                    System.out.println("2. Guru PNS");
-                    System.out.print("Masukkan pilihan Anda (1/2): ");
-                    int pilihanPengajar = scanner.nextInt();
+                if (pilihanPengajar == 1) {
+                    System.out.println("Memilih Guru Honorer.");
+                    System.out.print("Masukkan jumlah pertemuan: ");
+                    int jumlahPertemuan = scanner.nextInt();
+                    GuruHonorer guruHonorer = new GuruHonorer("Budi", "08123456789", "budi@gmail.com", "GH001", "Guru Honorer");
+                    double totalGaji = guruHonorer.hitungGaji(jumlahPertemuan);
+                    System.out.println("Total gaji Guru Honorer: Rp" + formatuang.format(totalGaji));
+                } else if (pilihanPengajar == 2) {
+                    System.out.println("Memilih Guru PNS.");
+                    System.out.print("Masukkan jumlah hari: ");
+                    int jumlahHari = scanner.nextInt();
+                    GuruPNS guruPNS = new GuruPNS("Siti", "08198765432", "siti@gmail.com", "GP001", "Guru PNS");
+                    double totalGaji = guruPNS.hitungGaji(jumlahHari);
+                    System.out.println("Total gaji Guru PNS: Rp" + formatuang.format(totalGaji));
+                } else {
+                    System.out.println("Pilihan salah");
+                }
+                break;
 
-                    if (pilihanPengajar == 1) {
-                        System.out.println("Anda memilih Guru Honorer.");
-                        String sql = "SELECT nama FROM datapegawai WHERE jabatan = 'Guru Honorer'";
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery(sql);
-                        System.out.println("Daftar Guru Honorer:");
-                        boolean found = false;
-                        while (rs.next()) {
-                            System.out.println("- " + rs.getString("nama"));
-                            found = true;
-                        }
-                        if (!found) {
-                            System.out.println("Tidak ada Guru Honorer di database.");
-                        }
-                    } else if (pilihanPengajar == 2) {
-                        System.out.println("Anda memilih Guru PNS.");
-                        String sql = "SELECT * FROM datapegawai WHERE jabatan = 'Guru PNS'";
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery(sql);
+            case 2:
+                System.out.println("Memilih Keamanan.");
+                System.out.println("Pilih jenis Keamanan:");
+                System.out.println("1. Satpam");
+                System.out.print("Masukkan pilihan (1): ");
+                int pilihanKeamanan = scanner.nextInt();
 
-                        // Simpan nama dan id ke list
-                        java.util.List<String> namaList = new java.util.ArrayList<>();
-                        java.util.List<Integer> idList = new java.util.ArrayList<>();
-                        int nomor = 1;
-                        System.out.println("Daftar Guru PNS:");
-                        while (rs.next()) {
-                            System.out.println(nomor + ".1 " + rs.getString("nama"));
-                            namaList.add(rs.getString("nama"));
-                            idList.add(rs.getInt("id"));
-                            nomor++;
-                        }
-                        if (namaList.isEmpty()) {
-                            System.out.println("Tidak ada Guru PNS di database.");
-                        } else {
-                            System.out.print("Pilih nomor Guru PNS: ");
-                            int pilihNama = scanner.nextInt();
-                            if (pilihNama < 1 || pilihNama > namaList.size()) {
-                                System.out.println("Pilihan tidak valid.");
-                            } else {
-                                int idTerpilih = idList.get(pilihNama - 1);
-                                String sqlDetail = "SELECT * FROM datapegawai WHERE id = ?";
-                                PreparedStatement pstmt = conn.prepareStatement(sqlDetail);
-                                pstmt.setInt(1, idTerpilih);
-                                ResultSet rsDetail = pstmt.executeQuery();
-                                if (rsDetail.next()) {
-                                    System.out.println("Detail Guru PNS:");
-                                    System.out.println("Nama      : " + rsDetail.getString("nama"));
-                                    System.out.println("No. Tlp   : " + rsDetail.getString("no_Tlp"));
-                                    System.out.println("Email     : " + rsDetail.getString("e_mail"));
-                                    System.out.println("ID Petugas: " + rsDetail.getString("id_Petugas"));
-                                    System.out.println("Jabatan   : " + rsDetail.getString("jabatan"));
-                                }
-                            }
-                        }
-                    } else {
-                        System.out.println("Pilihan tidak valid.");
-                    }
-                    break;
+                if (pilihanKeamanan == 1) {
+                    System.out.println("Memilih Satpam.");
+                    System.out.print("Masukkan jumlah hari: ");
+                    int jumlahHari = scanner.nextInt();
+                    Satpam satpam = new Satpam("Hanif", "08222", "haha@gmail.com", "SP001", "Satpam");
+                    double totalGaji = satpam.hitungGaji(jumlahHari);
+                    System.out.println("Total gaji Satpam: Rp" + formatuang.format(totalGaji));  
+                } else {
+                    System.out.println("Pilihan salah");
+                }
+                break;
 
-                case 2:
-                    System.out.println("Anda memilih Keamanan.");
-                    System.out.println("Pilih jenis Keamanan:");
-                    System.out.println("1. Satpam");
-                    System.out.print("Masukkan pilihan Anda (1): ");
-                    int pilihanKeamanan = scanner.nextInt();
+            case 3:
+                System.out.println("Memilih Kebersihan.");
+                System.out.println("Pilih jenis Kebersihan:");
+                System.out.println("1. Petugas Kebersihan");
+                System.out.println("2. Petugas Kebun");
+                System.out.print("Masukkan pilihan (1/2): ");
+                int pilihanKebersihan = scanner.nextInt();
 
-                    if (pilihanKeamanan == 1) {
-                        System.out.println("Anda memilih Satpam.");
-                        String sql = "SELECT nama FROM datapegawai WHERE jabatan = 'Satpam'";
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery(sql);
-                        System.out.println("Daftar Satpam:");
-                        boolean found = false;
-                        while (rs.next()) {
-                            System.out.println("- " + rs.getString("nama"));
-                            found = true;
-                        }
-                        if (!found) {
-                            System.out.println("Tidak ada Satpam di database.");
-                        }
-                    } else {
-                        System.out.println("Pilihan tidak valid.");
-                    }
-                    break;
+                if (pilihanKebersihan == 1) {
+                    System.out.println("Memilih Petugas Kebersihan.");
+                    System.out.print("Masukkan jumlah hari: ");
+                    int jumlahHari = scanner.nextInt();
+                    PetugasKebersihan petugasKebersihan = new PetugasKebersihan("Hahaha", "08222", "hahaha@gmail.com", "PK001", "Petugas Kebersihan");
+                    double totalGaji = petugasKebersihan.hitungGaji(jumlahHari);
+                    System.out.println("Total gaji Petugas Kebersihan: Rp" + formatuang.format(totalGaji));
+                } else if (pilihanKebersihan == 2) {
+                    System.out.println("Memilih Petugas Kebun.");
+                    System.out.print("Masukkan jumlah hari: ");
+                    int jumlahHari = scanner.nextInt();
+                    PetugasKebun petugasKebun = new PetugasKebun("Hahaha", "08222", "hahaha@gmail.com", "PK001", "Petugas Kebun");
+                    double totalGaji = petugasKebun.hitungGaji(jumlahHari);
+                    System.out.println("Total gaji Petugas Kebun: Rp" + formatuang.format(totalGaji));
+                } else {
+                    System.out.println("Pilihan salah");
+                }
+                break;
 
-                case 3:
-                    System.out.println("Anda memilih Kebersihan.");
-                    System.out.println("Pilih jenis Kebersihan:");
-                    System.out.println("1. Petugas Kebersihan");
-                    System.out.println("2. Petugas Kebun");
-                    System.out.print("Masukkan pilihan Anda (1/2): ");
-                    int pilihanKebersihan = scanner.nextInt();
-
-                    if (pilihanKebersihan == 1) {
-                        System.out.println("Anda memilih Petugas Kebersihan.");
-                        String sql = "SELECT nama FROM datapegawai WHERE jabatan = 'Petugas Kebersihan'";
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery(sql);
-                        System.out.println("Daftar Petugas Kebersihan:");
-                        boolean found = false;
-                        while (rs.next()) {
-                            System.out.println("- " + rs.getString("nama"));
-                            found = true;
-                        }
-                        if (!found) {
-                            System.out.println("Tidak ada Petugas Kebersihan di database.");
-                        }
-                    } else if (pilihanKebersihan == 2) {
-                        System.out.println("Anda memilih Petugas Kebun.");
-                        String sql = "SELECT nama FROM datapegawai WHERE jabatan = 'Petugas Kebun'";
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery(sql);
-                        System.out.println("Daftar Petugas Kebun:");
-                        boolean found = false;
-                        while (rs.next()) {
-                            System.out.println("- " + rs.getString("nama"));
-                            found = true;
-                        }
-                        if (!found) {
-                            System.out.println("Tidak ada Petugas Kebun di database.");
-                        }
-                    } else {
-                        System.out.println("Pilihan tidak valid.");
-                    }
-                    break;
-
-                default:
-                    System.out.println("Pilihan tidak valid.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Database error: " + e.getMessage());
+            default:
+                System.out.println("Pilihan salah");
         }
 
         scanner.close();
