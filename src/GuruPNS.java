@@ -35,6 +35,6 @@ public class GuruPNS extends Pengajar implements Gaji {
 
     @Override
     public String toString() {
-        return "Nama: " + nama + ", No. Tlp: " + no_Tlp + ", Email: " + e_mail + ", ID Petugas: " + id_Petugas + ", Jabatan: " + jabatan;
+        return "Nama: " + nama + ", No. Tlp: " + no_Tlp + ", Email: " + e_mail + ", ID Petugas: " + id_Pegawai + ", Jabatan: " + jabatan;
     }
 }
