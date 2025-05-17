@@ -1,6 +1,6 @@
-import Interfaces.Gaji;
+import Interfaces.hitungGaji;
 
-public class GuruPNS extends Pengajar implements Gaji {
+public class GuruPNS extends Pengajar implements hitungGaji {
     private double gajiPokok = 3000000;
     private double tunjangan = 1000000;
     private double gajiPerHari = 80000;

@@ -1,9 +1,9 @@
-import Interfaces.Gaji;
-public class GuruHonorer extends Pengajar implements Gaji {
+import Interfaces.hitungGaji;
+public class GuruHonorer extends Pengajar implements hitungGaji {
 
     private double gajiPokok = 3000000;
     private double tunjangan = 1000000;
-    private double gajiPertemuan = 80000;
+    private double gajiPerjam = 80000;
 
     public GuruHonorer(String nama, String no_Tlp, String e_mail, String id_Petugas, String jabatan) {
         super(nama, no_Tlp, e_mail, id_Petugas, jabatan);
@@ -26,10 +26,10 @@ public class GuruHonorer extends Pengajar implements Gaji {
 
     @Override
     public double HitungGajiPertemuan() {
-        return gajiPertemuan; 
+        return gajiPerjam;
     }
 
     public double HitungGaji(int jumlahPertemuan) {
-        return (gajiPertemuan * jumlahPertemuan);
+        return (gajiPerjam * jumlahPertemuan);
     }
 }

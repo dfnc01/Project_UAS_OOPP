@@ -1,5 +1,5 @@
-import Interfaces.Gaji;
-public class PetugasKebersihan extends Kebersihan implements Gaji {
+import Interfaces.hitungGaji;
+public class PetugasKebersihan extends Kebersihan implements hitungGaji {
     private double gajiPokok = 3000000;
     private double tunjangan = 1000000;
     private double gajiPerHari = 80000;

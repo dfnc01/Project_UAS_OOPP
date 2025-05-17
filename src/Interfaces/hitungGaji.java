@@ -1,8 +1,9 @@
 package Interfaces;
 
-public interface Gaji {
+public interface hitungGaji {
     public double HitungGajiPokok();
     public double HitungTunjangan();
     public double HitungGajiHarian();
     public double HitungGajiPertemuan();
+
 }
