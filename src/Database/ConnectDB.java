@@ -17,7 +17,7 @@ public class ConnectDB {
         return con;
 
     }
-    public static void crate() {
+    public static void create() {
         String sql = """
             CREATE TABLE IF NOT EXISTS Pengajar (
                 id pegawai INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,6 +25,7 @@ public class ConnectDB {
                 no telp TEXT
                 jabatan TEXT
                 email TEXT
+                tanggalMasuk TEXT
             );
         """;
         try (Connection con = ConnectDB.connect(); Statement stm = con.createStatement()) {

@@ -1,9 +1,41 @@
 package Interfaces;
 
-public interface hitungGaji {
-    public double HitungGajiPokok();
-    public double HitungTunjangan();
-    public double HitungGajiHarian();
-    public double HitungGajiPertemuan();
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
+public interface hitungGaji {
+    public static final double gajiPokok_guruPNS = 3287000 ;
+    public static final double gajiPerjam_guruHonorer = 50000 ;
+    public static final double gajiPokok_satpam = 3415279 ;
+    public static final double gajiPokok_tataUsaha = 2747789 ;
+    public static final double gajiPokok_petugasKebersihan = 2858170 ;
+    public static final double gajiPokok_petugasKebun = 2500000 ;
+
+    public static double hitungGaji_guruPNS (LocalDate tanggal_Masuk){
+        long bulanKerja = ChronoUnit.MONTHS.between(
+                tanggal_Masuk.withDayOfMonth(1),
+                LocalDate.now().withDayOfMonth(1)
+        );
+        return gajiPokok_guruPNS * bulanKerja ;
+    }
+    public static double hitungGaji_guruHonorer (int tanggal_Masuk){
+        return gajiPokok_guruPNS * tanggal_Masuk ;
+    }
+    public static double hitungGaji_satpam (int tanggal_Masuk){
+        return gajiPokok_guruPNS * tanggal_Masuk ;
+    }
+    public static double hitungGaji_tataUsaha (int tanggal_Masuk){
+        return gajiPokok_guruPNS * tanggal_Masuk ;
+    }
+    public static double hitungGaji_petugasKebersihan (int tanggal_Masuk){
+        return gajiPokok_guruPNS * tanggal_Masuk;
+    }
+    public static double hitungGaji_petugasKebun (int tanggal_Masuk){
+        return gajiPokok_guruPNS * tanggal_Masuk ;
+    }
+
+//    public double HitungGajiPokok();
+//    public double HitungTunjangan();
+//    public double HitungGajiHarian();
+//    public double HitungGajiPertemuan();
 }
