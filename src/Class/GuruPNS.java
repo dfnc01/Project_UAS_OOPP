@@ -10,7 +10,7 @@ public class GuruPNS extends Pengajar implements hitungGaji {
         super(nama, no_Tlp, e_mail, id_Pegawai, jabatan, tanggal_Masuk);
     }
 
-    public double totalGaji() {
+    public double totalGajiGuruPNS() {
         return hitungGaji.hitungGaji_guruPNS( tanggal_Masuk); // method dari interface
     }
 

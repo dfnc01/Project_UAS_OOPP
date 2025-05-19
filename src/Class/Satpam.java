@@ -11,6 +11,11 @@ public class Satpam extends Keamanan implements hitungGaji {
         super(nama, no_Tlp, e_mail, id_Pegawai, jabatan, tanggal_Masuk);
     }
 
+    public double totalGajiSatpam() {
+        return hitungGaji.hitungGaji_satpam( tanggal_Masuk); // method dari interface
+    }
 
-    
+    public String toString() {
+        return "Nama: " + nama + ", No. Tlp: " + no_Tlp + ", Email: " + e_mail + ", ID Petugas: " + id_Pegawai + ", Jabatan: " + jabatan ;
+    }
 }
