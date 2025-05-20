@@ -20,7 +20,7 @@ public interface hitungGaji {
         return gajiPokok_guruPNS * bulanKerja ;
     }
     public static double hitungGaji_guruHonorer (LocalDate tanggal_Masuk){
-        long bulanKerja = ChronoUnit.MONTHS.between(
+        long bulanKerja = ChronoUnit.DAYS.between(
                 tanggal_Masuk.withDayOfMonth(1),
                 LocalDate.now().withDayOfMonth(1)
         );

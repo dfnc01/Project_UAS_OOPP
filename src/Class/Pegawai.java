@@ -1,8 +1,7 @@
 package Class;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
-public class Pegawai {
+public class Pegawai {//super class
     protected String nama;
     protected String no_Tlp;
     protected String e_mail;

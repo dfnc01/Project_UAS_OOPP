@@ -9,7 +9,7 @@ public class ConnectDB {
     public static Connection connect() {
         Connection con = null ;
         try{
-            String link ="jdnc:sqlite:DataBase.db";
+            String link ="jdbc:sqlite:DataBaseSekolah.db";
             con = DriverManager.getConnection(link);
         }catch (SQLException w){
             System.out.println("gagal terhubung"+ w.getMessage());
@@ -34,5 +34,9 @@ public class ConnectDB {
         } catch (Exception e) {
             System.out.println(" Error: " + e.getMessage());
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(connect());
     }
 }

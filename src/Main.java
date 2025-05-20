@@ -35,8 +35,6 @@ public class Main  {
                     //data perpegawai
                     GuruHonorer guruHonorer = new GuruHonorer("abc", "0822", "abc@gmail.com", "12345", "Guru Honorer",LocalDate.of(2022, 4, 18));
                     //data perpegawai
-//                    int jumlahPertemuan = scanner.nextInt();
-//                    double totalGaji = guruHonorer.HitungGaji(jumlahPertemuan);
                     System.out.println("Total gaji Guru PNS: Rp" + formatuang.format(guruHonorer.totalGajiGuruHonorer()));
                 } else if (pilihanPengajar == 2) {
                     //data perpegawai
@@ -60,10 +58,9 @@ public class Main  {
                     //data perpegawai
                     Satpam satpam = new Satpam("abc", "0822", "abc@gmail.com", "67890", "Satpam",LocalDate.of(2024, 4, 18));
                     //data perpegawai
-                    System.out.print("Masukkan jumlah hari: ");
-//                    int jumlahHari = scanner.nextInt();
-//                    double totalGaji = satpam.HitungGaji(jumlahHari);
-                    System.out.println("Total gaji Class.Satpam: Rp" + formatuang.format(satpam.totalGajiSatpam()));
+                    System.out.print("Masukkan jumlah id: ");
+
+                    System.out.println("Total gaji Satpam: Rp" + formatuang.format(satpam.totalGajiSatpam()));
                 } else {
                     System.out.println("Pilihan tidak valid.");
                 }
