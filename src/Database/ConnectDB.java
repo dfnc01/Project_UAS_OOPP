@@ -26,6 +26,7 @@ public class ConnectDB {
                 jabatan TEXT
                 email TEXT
                 tanggalMasuk TEXT
+                peran TEXT NOT NULL
             );
         """;
         try (Connection con = ConnectDB.connect(); Statement stm = con.createStatement()) {

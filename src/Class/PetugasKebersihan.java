@@ -10,7 +10,7 @@ public class PetugasKebersihan extends Kebersihan implements hitungGaji {
     }
 
     public double totalGajiPetugasKebersihan(){
-        return hitungGaji.hitungGaji_petugasKebersihan(tanggal_Masuk);
+        return hitungGaji.hitungGaji_petugasKebersihan(tanggal_Masuk) * hitungTunjangan.hitungTunjangan_petugasKebersihan(tanggal_Masuk);
     }
 
     public String toString() {

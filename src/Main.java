@@ -105,15 +105,12 @@ public class Main  {
                     //data perpegawai
                     TataUsaha p = new TataUsaha("abc", "0822", "abc@gmail.com", "12345", "Guru Honorer",LocalDate.of(2022, 4, 18));
                     //data perpegawai
-//                    int jumlahPertemuan = scanner.nextInt();
-//                    double totalGaji = guruHonorer.HitungGaji(jumlahPertemuan);
                     System.out.println("Total gaji Tata Usaha: Rp" + formatuang.format(p.totalGajiTataUsaha()));
                 } else if (pilihanStaff == 2) {
                     //data perpegawai
                     petugasPerpus pp = new petugasPerpus("abc", "0822", "abc@gmail.com", "54321", "Guru PNS", LocalDate.of(2024, 4, 18));
-                    //data perpegawai
-//                    int jumlahBulan = scanner.nextInt();
-//                    double totalGaji = hitungGaji(jumlahBulan);
+                    //data perpegawa
+
                     System.out.println("Total gaji Guru PNS: Rp" + formatuang.format(pp.totalGajiPetugasPerpus()));
                 } else {
                     System.out.println("Pilihan tidak valid.");

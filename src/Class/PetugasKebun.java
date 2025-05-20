@@ -1,6 +1,6 @@
 package Class;
 
-import Interfaces.hitungGaji;
+import Interfaces.*;
 
 import java.time.LocalDate;
 
@@ -10,7 +10,7 @@ public class PetugasKebun extends Kebersihan implements hitungGaji {
     }
 
     public double totalGajiPetugasKebun(){
-        return hitungGaji.hitungGaji_petugasKebun(tanggal_Masuk);
+        return hitungGaji.hitungGaji_petugasKebun(tanggal_Masuk) * hitungTunjangan.hitungTunjangan_petugasKebun(tanggal_Masuk);
     }
     public String toString() {
         return "Nama: " + nama + ", No. Tlp: " + no_Tlp + ", Email: " + e_mail + ", ID Petugas: " + id_Pegawai + ", Jabatan: " + jabatan ;

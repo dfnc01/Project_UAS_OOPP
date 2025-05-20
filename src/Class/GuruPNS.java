@@ -1,6 +1,6 @@
 package Class;
 
-import Interfaces.hitungGaji;
+import Interfaces.*;
 
 import java.time.LocalDate;
 
@@ -11,7 +11,7 @@ public class GuruPNS extends Pengajar implements hitungGaji {
     }
 
     public double totalGajiGuruPNS() {
-        return hitungGaji.hitungGaji_guruPNS( tanggal_Masuk); // method dari interface
+        return hitungGaji.hitungGaji_guruPNS(tanggal_Masuk) * hitungTunjangan.hitungTunjangan_guruPNS(tanggal_Masuk); // method dari interface
     }
 
     public String toString() {

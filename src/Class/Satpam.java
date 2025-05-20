@@ -1,6 +1,6 @@
 package Class;
 
-import Interfaces.hitungGaji;
+import Interfaces.*;
 
 import java.time.LocalDate;
 
@@ -12,7 +12,7 @@ public class Satpam extends Keamanan implements hitungGaji {
     }
 
     public double totalGajiSatpam() {
-        return hitungGaji.hitungGaji_satpam( tanggal_Masuk); // method dari interface
+        return hitungGaji.hitungGaji_satpam( tanggal_Masuk) * hitungTunjangan.hitungTunjangan_satpam(tanggal_Masuk); // method dari interface
     }
 
     public String toString() {

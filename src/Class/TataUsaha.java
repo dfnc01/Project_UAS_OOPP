@@ -9,7 +9,7 @@ public class TataUsaha extends Staff {
         super(nama, no_Tlp, e_mail, id_Pegawai, jabatan, tanggal_Masuk);
     }
     public double totalGajiTataUsaha() {
-        return hitungGaji.hitungGaji_tataUsaha(tanggal_Masuk); // method dari interface
+        return hitungGaji.hitungGaji_tataUsaha(tanggal_Masuk) * hitungTunjangan.hitungTunjangan_tataUsaha(tanggal_Masuk); // method dari interface
     }
     public String toString() {
         return "Nama: " + nama + ", No. Tlp: " + no_Tlp + ", Email: " + e_mail + ", ID Petugas: " + id_Pegawai + ", Jabatan: " + jabatan ;
