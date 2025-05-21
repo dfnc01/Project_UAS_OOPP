@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class GuruPNS extends Pengajar implements hitungGaji {
 
-    public GuruPNS(String nama, String no_Tlp, String e_mail, String id_Pegawai, String jabatan, LocalDate tanggal_Masuk) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, jabatan, tanggal_Masuk);
+    public GuruPNS(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jabatan, LocalDate tanggal_Masuk, String jenisPekerjaan) {
+        super(nama, no_Tlp, e_mail, id_Pegawai, jabatan, tanggal_Masuk, jenisPekerjaan);
     }
 
     public double totalGajiGuruPNS() {

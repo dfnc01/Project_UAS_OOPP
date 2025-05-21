@@ -1,7 +1,7 @@
 package Database;
 
 
-public class TableDB {
+public class Connect {
 
 
 }
