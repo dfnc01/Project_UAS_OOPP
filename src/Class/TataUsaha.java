@@ -5,13 +5,14 @@ import Interfaces.*;
 import java.time.LocalDate;
 
 public class TataUsaha extends Staff {
-    public TataUsaha(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jabatan, LocalDate tanggal_Masuk, String jenisPekerjaan) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, jabatan, tanggal_Masuk, jenisPekerjaan);
+    public TataUsaha(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jenisPekerjaan, LocalDate tanggal_Masuk) {
+        super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan, tanggal_Masuk);
     }
+
     public double totalGajiTataUsaha() {
-        return hitungGaji.hitungGaji_tataUsaha(tanggal_Masuk) * hitungTunjangan.hitungTunjangan_tataUsaha(tanggal_Masuk); // method dari interface
+        return hitungGaji.hitungGaji_tataUsaha(getTanggal_Masuk()) + hitungTunjangan.hitungTunjangan_tataUsaha(getTanggal_Masuk()); // method dari interface
     }
     public String toString() {
-        return "Nama: " + nama + ", No. Tlp: " + no_Tlp + ", Email: " + e_mail + ", ID Petugas: " + id_Pegawai + ", Jabatan: " + jabatan ;
+        return "Nama: " + getNama() + ", No. Tlp: " + getNo_Tlp() + ", Email: " + getE_mail() + ", ID Petugas: " + getId_Pegawai() + ", Profesi: " + getProfesi();
     }
 }

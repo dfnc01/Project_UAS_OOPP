@@ -5,16 +5,15 @@ import Interfaces.*;
 import java.time.LocalDate;
 
 public class GuruPNS extends Pengajar implements hitungGaji {
-
-    public GuruPNS(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jabatan, LocalDate tanggal_Masuk, String jenisPekerjaan) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, jabatan, tanggal_Masuk, jenisPekerjaan);
+    public GuruPNS(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jenisPekerjaan, LocalDate tanggal_Masuk) {
+        super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan, tanggal_Masuk);
     }
 
     public double totalGajiGuruPNS() {
-        return hitungGaji.hitungGaji_guruPNS(tanggal_Masuk) * hitungTunjangan.hitungTunjangan_guruPNS(tanggal_Masuk); // method dari interface
+        return hitungGaji.hitungGaji_guruPNS(getTanggal_Masuk()) * hitungTunjangan.hitungTunjangan_guruPNS(getTanggal_Masuk()); // method dari interface
     }
 
     public String toString() {
-        return "Nama: " + nama + ", No. Tlp: " + no_Tlp + ", Email: " + e_mail + ", ID Petugas: " + id_Pegawai + ", Jabatan: " + jabatan ;
+        return "Nama: " + getNama() + ", No. Tlp: " + getNo_Tlp() + ", Email: " + getE_mail() + ", ID Petugas: " + getId_Pegawai() + ", Profesi: " + getProfesi();
     }
 }
