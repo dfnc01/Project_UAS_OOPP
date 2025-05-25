@@ -1,8 +1,10 @@
 package Class;
 
 import Interfaces.*;
-
 import java.time.LocalDate;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PetugasKebersihan extends Kebersihan implements hitungGaji {
     public PetugasKebersihan(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jenisPekerjaan, LocalDate tanggal_Masuk) {
@@ -12,8 +14,42 @@ public class PetugasKebersihan extends Kebersihan implements hitungGaji {
     public double totalGajiPetugasKebersihan(){
         return hitungGaji.hitungGaji_petugasKebersihan(getTanggal_Masuk()) * hitungTunjangan.hitungTunjangan_petugasKebersihan(getTanggal_Masuk());
     }
+    public static List<PetugasKebersihan> getListPetugasKebersihan() {
+        List<PetugasKebersihan> listPetugasKebersihan = new ArrayList<>();
+        String link = "jdbc:sqlite:DataBase.db";
+        String sql = "SELECT * FROM pegawai WHERE profesi = ?";
+        try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
+            prstm.setString(1, "Petugas Kebersihan");
+            ResultSet rs = prstm.executeQuery();
+            while (rs.next()) {
+                System.out.println("ID: " + rs.getInt("idPegawai"));
+                System.out.println("Nama: " + rs.getString("nama"));
+                System.out.println("No Telp: " + rs.getString("noTelp"));
+                System.out.println("Email: " + rs.getString("email"));
+                System.out.println("Tanggal Masuk: " + rs.getString("tanggalMasuk"));
+                System.out.println("Profesi: " + rs.getString("profesi"));
 
-    public String toString() {
-        return "Nama: " + getNama() + ", No. Tlp: " + getNo_Tlp() + ", Email: " + getE_mail() + ", ID Petugas: " + getId_Pegawai() + ", Profesi: " + getProfesi();
+                System.out.println("----------------------");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return listPetugasKebersihan;
+    }
+    public static void deletePetugasKebersihan(String profesi, int idPegawai) {
+        String link = "jdbc:sqlite:DataBase.db";
+        String sql = "DELETE FROM pegawai WHERE profesi = ? AND idPegawai = ?";
+        try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
+            prstm.setString(1, "Petugas Kebersihan");
+            prstm.setInt(2, idPegawai);
+            int rowsAffected = prstm.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Data Petugas Kebersihan dengan ID " + idPegawai + " berhasil dihapus.");
+            } else {
+                System.out.println("Tidak ada data Petugas Kebersihan dengan ID " + idPegawai + ".");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error saat menghapus data Petugas Kebersihan : " + e.getMessage());
+        }
     }
 }

@@ -18,12 +18,12 @@ public class Create_Connect {
                       noTelp TEXT,
                       email TEXT,
                       tanggalMasuk TEXT NOT NULL,
-                      jenisPejekerjaan TEXT NOT NULL
+                      profesi TEXT NOT NULL
                       );
                   """;
             stm.execute(Pegawai);
+            System.out.println("Database berhasil terhubung.");
             System.out.println("Tabel berhasil dibuat.");
-
             return con;
         } catch (SQLException e) {
             System.out.println(" Error: " + e.getMessage());
