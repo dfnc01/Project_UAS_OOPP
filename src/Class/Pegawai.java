@@ -1,4 +1,5 @@
 package Class;
+import java.sql.*;
 import java.time.LocalDate;
 
 public class Pegawai {//super class
@@ -64,5 +65,22 @@ public class Pegawai {//super class
 
     public void setTanggal_Masuk(LocalDate tanggal_Masuk) {
         this.tanggal_Masuk = tanggal_Masuk;
+    }
+
+    public String getProfesi(int id_Pegawai) {
+        String Url ="jdbc:sqlite:DataBase.db";
+        String sql = "SELECT Profesi FROM Pegawai WHERE idPegawai = ?";
+        try(Connection conn = DriverManager.getConnection(Url); PreparedStatement prstm = conn.prepareStatement(sql)){
+            prstm.setInt(1,id_Pegawai);
+            ResultSet rs = prstm.executeQuery();
+            if(rs.next()){
+                return rs.getString("profesi");
+            }else {
+                return null;
+            }
+        }catch (SQLException e){
+            System.out.println("Error: " + e.getMessage());
+            return null;
+        }
     }
 }

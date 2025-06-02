@@ -6,11 +6,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Create_Connect {
-
-
     public static Connection create() {
         String link = "jdbc:sqlite:DataBase.db";
-        try (Connection con = DriverManager.getConnection(link);Statement stm = con.createStatement()) {
+        try {Connection con = DriverManager.getConnection(link);Statement stm = con.createStatement();
             String Pegawai = """
                     CREATE TABLE IF NOT EXISTS Pegawai(
                       idPegawai INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,6 +20,7 @@ public class Create_Connect {
                       );
                   """;
             stm.execute(Pegawai);
+            stm.close();
             System.out.println("Database berhasil terhubung.");
             System.out.println("Tabel berhasil dibuat.");
             return con;
@@ -30,4 +29,17 @@ public class Create_Connect {
         }
         return null;
     }
+
+    //    public static void main(String[] args) {
+//        String url = "jdbc:sqlite:DataBase.db";
+//        try (Connection con = DriverManager.getConnection(url);
+//             Statement stmt = con.createStatement()) {
+//            stmt.execute("DELETE FROM Pegawai;");
+//            // dst, untuk setiap tabel
+//            System.out.println("Semua data dihapus.");
+//        } catch (SQLException e) {
+//            System.out.println("Error: " + e.getMessage());
+//        }
+//    }
+
 }

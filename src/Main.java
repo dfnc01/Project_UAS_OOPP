@@ -13,7 +13,7 @@ public class Main  {
         boolean isLogin = false;
 
         do {
-            System.out.println("Menu Admin:");
+            System.out.println("Menu Admin");
             System.out.println("1. Input Data Pegawai");
             System.out.println("2. Tampilkan Data Pegawai");
             System.out.println("3. Hapus Data Pegawai");
@@ -25,9 +25,10 @@ public class Main  {
             switch (menu) {
                 case 1:
                     //input data pegawai
+
                     System.out.println("Masukkan Data Pegawai Baru ");
                     System.out.println("Masukkan Nama :");
-                    inputData.setNama (sc.next());
+                    inputData.setNama(sc.next());
                     sc.nextLine();
                     System.out.println("Masukkan No Telepon :");
                     inputData.setNo_Tlp(sc.next());
@@ -46,7 +47,7 @@ public class Main  {
 
                     // Simpan data pegawai ke database
                     InputDB.simpanData(inputData);
-                    sc.close();
+
                     break;
                 case 2:
                     //tampilkan data pegawai
@@ -110,30 +111,37 @@ public class Main  {
                     switch (pilihHapus) {
                         case 1:
                             GuruPNS.getListGuruPNS();
+                            int idGuruPNS = sc.nextInt();
                             GuruPNS.deleteGuruPNS("Guru PNS", 0);
                             break;
                         case 2:
                             GuruHonorer.getListGuruHonorer();
-                            GuruHonorer.deleteGuruHonorer("Guru Honorer", 0);
+                            int idGuruHonorer= sc.nextInt();
+                            GuruHonorer.deleteGuruHonorer(idGuruHonorer);
                             break;
                         case 3:
                             PetugasKebersihan.getListPetugasKebersihan();
+                            int idPetugasKebersihan = sc.nextInt();
                             PetugasKebersihan.deletePetugasKebersihan("Petugas Kebersihan", 0);
                             break;
                         case 4:
                             PetugasKebun.getListPetugasKebun();
+                            int idPetugasKebun = sc.nextInt();
                             PetugasKebun.deletePetugasKebun("Petugas Kebun", 0);
                             break;
                         case 5:
                             Satpam.getListSatpam();
+                            int idSatpam = sc.nextInt();
                             Satpam.deleteSatpam("Satpam", 0);
                             break;
                         case 6:
                             TataUsaha.getListTataUsaha();
+                            int idTataUsaha = sc.nextInt();
                             TataUsaha.deleteTataUsaha("Tata Usaha", 0);
                             break;
                         case 7:
                             petugasPerpus.getListPetugasPerpus();
+                            int idPetugasPerpus = sc.nextInt();
                             petugasPerpus.deletePetugasPerpus("Petugas Perpustakaan", 0);
                             break;
                         default:
@@ -151,6 +159,7 @@ public class Main  {
                     System.out.println("Pilihan tidak valid.");
             }
         }while (!isLogin) ;
+        sc.close();
     }
 
     public static void user(){
@@ -168,94 +177,28 @@ public class Main  {
 
         switch (JenisPekerjaan) {
             case 1:
-                System.out.println("Memilih Pengajar.");
-                System.out.println("1. Guru Honorer");
-                System.out.println("2. Guru PNS");
-                System.out.print("Masukkan pilihan (1/2): ");
-                int pilihanPengajar = sc.nextInt();
-                sc.nextLine();
-
-                if (pilihanPengajar == 1) {
-
-                    System.out.print("Masukkan Id Pegawai :");
-
-
-//                    System.out.println("Total gaji Guru PNS: Rp" + formatuang.format(guruHonorer.totalGajiGuruHonorer()));
-                } else if (pilihanPengajar == 2) {
-                    //data perpegawai
-                    GuruPNS guruPNS = new GuruPNS("abc", "0822", "abc@gmail.com", 54321, "Guru PNS", LocalDate.of(2024, 4, 18));
-                    //data perpegawai
-
-                    System.out.println("Total gaji Guru PNS: Rp" + formatuang.format(guruPNS.totalGajiGuruPNS()));
-                } else {
-                    System.out.println("Pilihan tidak valid.");
-                }
+                Pengajar gajiPengajar = new Pengajar("", "", "", 0, "", LocalDate.now());
+                System.out.println("Masukkan id Pengajar:");
+                int inputIdPengajar = sc.nextInt();
+                gajiPengajar.getProfesi(inputIdPengajar);
                 break;
             case 2:
-                System.out.println("Memilih Keamanan.");
-                System.out.println("1. Satpam");
-                System.out.print("Masukkan pilihan (1): ");
-                int pilihanKeamanan = sc.nextInt();
-                sc.nextLine();
-
-                if (pilihanKeamanan == 1) {
-                    //data perpegawai
-                    Satpam satpam = new Satpam("abc", "0822", "abc@gmail.com", 67890, "Satpam",LocalDate.of(2024, 4, 18));
-                    //data perpegawai
-                    System.out.print("Masukkan jumlah id: ");
-
-                    System.out.println("Total gaji Satpam: Rp" + formatuang.format(satpam.totalGajiSatpam()));
-                } else {
-                    System.out.println("Pilihan tidak valid.");
-                }
+                Keamanan gajiKeamanan = new Keamanan("", "", "", 0, "", LocalDate.now());
+                System.out.println("Masukkan id Keamanan:");
+                int inputIdKeamanan = sc.nextInt();
+                gajiKeamanan.getProfesi(inputIdKeamanan);
                 break;
             case 3:
-                System.out.println("Memilih Kebersihan.");
-                System.out.println("1. Petugas Kebersihan");
-                System.out.println("2. Petugas Kebun");
-                System.out.print("Masukkan pilihan (1/2): ");
-                int pilihanKebersihan = sc.nextInt();
-                sc.nextLine();
-
-                if (pilihanKebersihan == 1) {
-                    //data perpegawai
-                    PetugasKebersihan pk = new PetugasKebersihan("abc", "0822", "abc@gmail.com", 11223, "Petugas Kebersihan",LocalDate.of(2024, 4, 18));
-                    //data perpegawai
-                    System.out.print("Masukkan jumlah hari: ");
-
-                    System.out.println("Total gaji Petugas Class.Kebersihan: Rp" + formatuang.format(pk.totalGajiPetugasKebersihan()));
-                } else if (pilihanKebersihan == 2) {
-                    //data perpegawai
-                    PetugasKebun pkb = new PetugasKebun("abc", "0822", "abc@gmail.com", 44556, "Petugas Kebun",LocalDate.of(2024, 4, 18));
-                    //data perpegawai
-                    System.out.print("Masukkan jumlah hari: ");
-                    System.out.println("Total gaji Petugas Kebun: Rp" + formatuang.format(pkb.totalGajiPetugasKebun()));
-                } else {
-                    System.out.println("Pilihan tidak valid.");
-                }
+                Kebersihan gajiKebersihan = new Kebersihan("", "", "", 0, "", LocalDate.now());
+                System.out.println("Masukkan id Kebersihan:");
+                int inputIdKebersihan = sc.nextInt();
+                gajiKebersihan.getProfesi(inputIdKebersihan);
                 break;
             case 4:
-                System.out.println("Memilih Pengajar.");
-                System.out.println("1. Tata Usaha");
-                System.out.println("2. Petugas Perpus");
-                System.out.print("Masukkan pilihan (1/2): ");
-                int pilihanStaff = sc.nextInt();
-                sc.nextLine();
-
-                if (pilihanStaff == 1) {
-                    //data perpegawai
-                    TataUsaha p = new TataUsaha("abc", "0822", "abc@gmail.com", 12345, "Tata Usaha",LocalDate.of(2022, 4, 18));
-                    //data perpegawai
-                    System.out.println("Total gaji Tata Usaha: Rp" + formatuang.format(p.totalGajiTataUsaha()));
-                } else if (pilihanStaff == 2) {
-                    //data perpegawai
-                    petugasPerpus pp = new petugasPerpus("abc", "0822", "abc@gmail.com", 54321, " Petugas Perpus", LocalDate.of(2024, 4, 18));
-                    //data perpegawa
-
-                    System.out.println("Total gaji Guru PNS: Rp" + formatuang.format(pp.totalGajiPetugasPerpus()));
-                } else {
-                    System.out.println("Pilihan tidak valid.");
-                }
+                Staff gajiStaff = new Staff("", "", "", 0, "", LocalDate.now());
+                System.out.println("Memilih Pengajar:");
+                int inputIdStaff = sc.nextInt();
+                gajiStaff.getProfesi(inputIdStaff);
                 break;
             default:
                 System.out.println("Pilihan tidak valid.");
@@ -272,7 +215,7 @@ public class Main  {
         String[] Password = {"admin1234", "12345678"};
         boolean isLogin = false;
         do {
-            System.out.println("Login Sebagai :");
+            System.out.println("Login Sebagai");
             System.out.print("Username: ");
             String username = sc.nextLine();
             System.out.print("Password: ");

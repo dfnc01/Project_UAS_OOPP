@@ -11,10 +11,6 @@ public class GuruPNS extends Pengajar implements hitungGaji {
         super(nama, no_Tlp, e_mail, id_Pegawai, profesi, tanggal_Masuk);
     }
 
-    public double totalGajiGuruPNS() {
-        return hitungGaji.hitungGaji_guruPNS(getTanggal_Masuk()) * hitungTunjangan.hitungTunjangan_guruPNS(getTanggal_Masuk()); // method dari interface
-    }
-
     public static List<GuruPNS> getListGuruPNS() {
         List<GuruPNS> listGuruPNS = new ArrayList<>();
         String link = "jdbc:sqlite:DataBase.db";
