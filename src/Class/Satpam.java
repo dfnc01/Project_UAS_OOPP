@@ -1,14 +1,18 @@
 package Class;
 
 import Interfaces.*;
-import java.time.LocalDate;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Satpam extends Keamanan implements hitungGaji {
     public Satpam(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jenisPekerjaan, LocalDate tanggal_Masuk) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan, tanggal_Masuk);
+        super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan, "Satpam", tanggal_Masuk);
+    }
+
+    public Satpam() {
+        super("", "", "", 0, "", "Satpam", LocalDate.now());
     }
 
     public double totalGajiSatpam() {
@@ -17,7 +21,7 @@ public class Satpam extends Keamanan implements hitungGaji {
 
     public static List<Satpam> getListSatpam() {
         List<Satpam> listSatpam = new ArrayList<>();
-        String link = "jdbc:sqlite:DataBase.db";
+        String link = "jdbc:sqlite:Database.db";
         String sql = "SELECT * FROM pegawai WHERE profesi = ?";
         try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Satpam");
@@ -38,7 +42,7 @@ public class Satpam extends Keamanan implements hitungGaji {
         return listSatpam;
     }
     public static void deleteSatpam(String profesi, int idPegawai) {
-        String link = "jdbc:sqlite:DataBase.db";
+        String link = "jdbc:sqlite:Database.db";
         String sql = "DELETE FROM pegawai WHERE profesi = ? AND idPegawai = ?";
         try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Satpam");

@@ -1,14 +1,18 @@
 package Class;
 
 import Interfaces.*;
-import java.time.LocalDate;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TataUsaha extends Staff {
     public TataUsaha(String nama, String no_Tlp, String e_mail, int id_Pegawai, String profesi, LocalDate tanggal_Masuk) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, profesi, tanggal_Masuk);
+        super(nama, no_Tlp, e_mail, id_Pegawai, profesi, "Tata Usaha", tanggal_Masuk);
+    }
+
+    public TataUsaha() {
+        super("", "", "", 0, "", "Tata Usaha", LocalDate.now());
     }
 
     public double totalGajiTataUsaha() {
@@ -17,7 +21,7 @@ public class TataUsaha extends Staff {
 
     public static List<TataUsaha> getListTataUsaha() {
         List<TataUsaha> listTataUsaha = new ArrayList<>();
-        String link = "jdbc:sqlite:DataBase.db";
+        String link = "jdbc:sqlite:Database.db";
         String sql = "SELECT * FROM pegawai WHERE profesi = ?";
         try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Tata Usaha");
@@ -39,7 +43,7 @@ public class TataUsaha extends Staff {
     }
 
     public static void deleteTataUsaha(String profesi, int idPegawai) {
-        String link = "jdbc:sqlite:DataBase.db";
+        String link = "jdbc:sqlite:Database.db";
         String sql = "DELETE FROM pegawai WHERE profesi = ? AND idPegawai = ?";
         try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Tata Usaha");

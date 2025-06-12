@@ -2,21 +2,26 @@ package Class;
 
 import Interfaces.*;
 import java.sql.*;
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class GuruHonorer extends Pengajar implements hitungGaji {
     public GuruHonorer(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jenisPekerjaan, LocalDate tanggal_Masuk) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan, tanggal_Masuk);
+        super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan,  "Guru Honorer", tanggal_Masuk);
+    }
+
+    public GuruHonorer() {
+        super("", "", "", 0, "", "Guru Honorer", LocalDate.now());
     }
 
     public static List<GuruHonorer> getListGuruHonorer() {
         List<GuruHonorer> listGuruHonorer = new ArrayList<>();
-        String link = "jdbc:sqlite:DataBase.db";
+        String link = "jdbc:sqlite:Database.db";
         String sql = "SELECT * FROM pegawai WHERE profesi = ?";
-        try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
+        try (Connection con = DriverManager.getConnection(link); 
+        PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Guru Honorer");
             ResultSet rs = prstm.executeQuery();
             int count = 0;
@@ -51,7 +56,7 @@ public class GuruHonorer extends Pengajar implements hitungGaji {
     }
 
     public static GuruHonorer deleteGuruHonorer(int idPegawai) {
-        String link = "jdbc:sqlite:DataBase.db";
+        String link = "jdbc:sqlite:Database.db";
         String sql = "DELETE FROM pegawai WHERE profesi = ? AND idPegawai = ?";
         try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Guru Honorer");

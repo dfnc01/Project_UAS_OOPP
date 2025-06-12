@@ -15,52 +15,50 @@ public interface hitungGaji {
     public static double hitungGaji_guruPNS (LocalDate tanggal_Masuk){
         long bulanKerja = ChronoUnit.MONTHS.between(
                 tanggal_Masuk.withDayOfMonth(1),
-                LocalDate.now().withDayOfMonth(1).minusMonths(1)
+                LocalDate.now().withDayOfMonth(1)
         );
-        return gajiPokok_guruPNS * bulanKerja ;
+        return gajiPokok_guruPNS * Math.max(0, bulanKerja);
     }
     public static double hitungGaji_guruHonorer (LocalDate tanggal_Masuk){
-        long bulanKerja = ChronoUnit.DAYS.between(
-                tanggal_Masuk.withDayOfMonth(1),
-                LocalDate.now().withDayOfMonth(1).minusMonths(1)
+        long hariKerja = ChronoUnit.DAYS.between(
+                tanggal_Masuk,
+                LocalDate.now()
         );
-        return gajiPerjam_guruHonorer * bulanKerja ;
+        return gajiPerjam_guruHonorer * Math.max(0, hariKerja);
     }
     public static double hitungGaji_satpam (LocalDate tanggal_Masuk){
         long bulanKerja = ChronoUnit.MONTHS.between(
                 tanggal_Masuk.withDayOfMonth(1),
-                LocalDate.now().withDayOfMonth(1).minusMonths(1)
+                LocalDate.now().withDayOfMonth(1)
         );
-        return gajiPokok_satpam * bulanKerja ;
+        return gajiPokok_satpam * Math.max(0, bulanKerja);
     }
     public static double hitungGaji_tataUsaha (LocalDate tanggal_Masuk){
         long bulanKerja = ChronoUnit.MONTHS.between(
                 tanggal_Masuk.withDayOfMonth(1),
-                LocalDate.now().withDayOfMonth(1).minusMonths(1)
+                LocalDate.now().withDayOfMonth(1)
         );
-        return gajiPokok_tataUsaha * bulanKerja ;
+        return gajiPokok_tataUsaha * Math.max(0, bulanKerja);
     }
     public static double hitungGaji_petugasKebersihan (LocalDate tanggal_Masuk){
         long bulanKerja = ChronoUnit.MONTHS.between(
                 tanggal_Masuk.withDayOfMonth(1),
-                LocalDate.now().withDayOfMonth(1).minusMonths(1)
+                LocalDate.now().withDayOfMonth(1)
         );
-        return gajiPokok_petugasKebersihan * bulanKerja ;
+        return gajiPokok_petugasKebersihan * Math.max(0, bulanKerja);
     }
     public static double hitungGaji_petugasKebun (LocalDate tanggal_Masuk){
         long bulanKerja = ChronoUnit.MONTHS.between(
                 tanggal_Masuk.withDayOfMonth(1),
-                LocalDate.now().withDayOfMonth(1).minusMonths(1)
+                LocalDate.now().withDayOfMonth(1)
         );
-        return gajiPokok_petugasKebun * bulanKerja ;
+        return gajiPokok_petugasKebun * Math.max(0, bulanKerja);
     }
     public static double hitungGaji_petugasPerpus (LocalDate tanggal_Masuk){
         long bulanKerja = ChronoUnit.MONTHS.between(
                 tanggal_Masuk.withDayOfMonth(1),
-                LocalDate.now().withDayOfMonth(1).minusMonths(1)
+                LocalDate.now().withDayOfMonth(1)
         );
-        return getGajiPokok_petugasPerpus * bulanKerja ;
+        return getGajiPokok_petugasPerpus * Math.max(0, bulanKerja);
     }
-
-
 }

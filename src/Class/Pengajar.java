@@ -1,13 +1,12 @@
 package Class;
 
 import Interfaces.*;
-
 import java.sql.*;
 import java.time.LocalDate;
 
 public class Pengajar extends Pegawai{
-    public Pengajar(String nama, String no_Tlp, String e_mail, int id_Pegawai, String rofesi, LocalDate tanggal_Masuk) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, rofesi, tanggal_Masuk);
+    public Pengajar(String nama, String no_Tlp, String e_mail, int id_Pegawai, String profesi, String role, LocalDate tanggal_Masuk) {
+        super(nama, no_Tlp, e_mail, id_Pegawai, profesi, role, tanggal_Masuk);
     }
 
     @Override

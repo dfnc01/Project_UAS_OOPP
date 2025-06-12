@@ -2,13 +2,12 @@ package Class;
 
 import Interfaces.hitungGaji;
 import Interfaces.hitungTunjangan;
-
 import java.sql.*;
 import java.time.LocalDate;
 
 public class Kebersihan extends Pegawai {
-    public Kebersihan(String nama, String no_Tlp, String e_mail, int id_Pegawai, String profesi, LocalDate tanggal_Masuk) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, profesi, tanggal_Masuk);
+    public Kebersihan(String nama, String no_Tlp, String e_mail, int id_Pegawai, String profesi, String role, LocalDate tanggal_Masuk) {
+        super(nama, no_Tlp, e_mail, id_Pegawai, profesi, role, tanggal_Masuk);
     }
 
     @Override

@@ -8,14 +8,16 @@ public class Pegawai {//super class
     private String e_mail;
     private int id_Pegawai;
     private String profesi;
+    private String role;
     private LocalDate tanggal_Masuk;
 
-    public Pegawai(String nama, String no_Tlp, String e_mail, int id_Pegawai, String profesi, LocalDate tanggal_Masuk) {
+    public Pegawai(String nama, String no_Tlp, String e_mail, int id_Pegawai, String profesi, String role, LocalDate tanggal_Masuk) {
         this.nama = nama;
         this.no_Tlp = no_Tlp;
         this.e_mail = e_mail;
         this.id_Pegawai = id_Pegawai;
         this.profesi = profesi;
+        this.role = role;
         this.tanggal_Masuk = tanggal_Masuk;
     }
 
@@ -57,6 +59,10 @@ public class Pegawai {//super class
 
     public void setProfesi(String profesi) {
         this.profesi = profesi;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public LocalDate getTanggal_Masuk() {

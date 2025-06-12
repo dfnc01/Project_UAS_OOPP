@@ -1,22 +1,27 @@
 package Class;
 
 import Interfaces.*;
-import java.time.LocalDate;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PetugasKebersihan extends Kebersihan implements hitungGaji {
     public PetugasKebersihan(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jenisPekerjaan, LocalDate tanggal_Masuk) {
-        super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan, tanggal_Masuk);
+        super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan, "Petugas Kebersihan",  tanggal_Masuk);
     }
 
     public double totalGajiPetugasKebersihan(){
         return hitungGaji.hitungGaji_petugasKebersihan(getTanggal_Masuk()) * hitungTunjangan.hitungTunjangan_petugasKebersihan(getTanggal_Masuk());
     }
+
+    public PetugasKebersihan() {
+        super("", "", "", 0, "", "Petugas Kebersihan", LocalDate.now());
+    }
+    
     public static List<PetugasKebersihan> getListPetugasKebersihan() {
         List<PetugasKebersihan> listPetugasKebersihan = new ArrayList<>();
-        String link = "jdbc:sqlite:DataBase.db";
+        String link = "jdbc:sqlite:Database.db";
         String sql = "SELECT * FROM pegawai WHERE profesi = ?";
         try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Petugas Kebersihan");
@@ -37,7 +42,7 @@ public class PetugasKebersihan extends Kebersihan implements hitungGaji {
         return listPetugasKebersihan;
     }
     public static void deletePetugasKebersihan(String profesi, int idPegawai) {
-        String link = "jdbc:sqlite:DataBase.db";
+        String link = "jdbc:sqlite:Database.db";
         String sql = "DELETE FROM pegawai WHERE profesi = ? AND idPegawai = ?";
         try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Petugas Kebersihan");

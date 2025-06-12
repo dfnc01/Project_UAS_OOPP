@@ -1,14 +1,16 @@
 package Database;
 
 import java.sql.Connection;
-import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Create_Connect {
     public static Connection create() {
-        String link = "jdbc:sqlite:DataBase.db";
-        try {Connection con = DriverManager.getConnection(link);Statement stm = con.createStatement();
+        String link = "jdbc:sqlite:Database.db";
+        try {
+            Connection con = DriverManager.getConnection(link);
+            Statement stm = con.createStatement();
             String Pegawai = """
                     CREATE TABLE IF NOT EXISTS Pegawai(
                       idPegawai INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,16 +32,15 @@ public class Create_Connect {
         return null;
     }
 
-    //    public static void main(String[] args) {
-//        String url = "jdbc:sqlite:DataBase.db";
-//        try (Connection con = DriverManager.getConnection(url);
-//             Statement stmt = con.createStatement()) {
-//            stmt.execute("DELETE FROM Pegawai;");
-//            // dst, untuk setiap tabel
-//            System.out.println("Semua data dihapus.");
-//        } catch (SQLException e) {
-//            System.out.println("Error: " + e.getMessage());
-//        }
-//    }
-
+    public static void resetAutoIncrement() {
+        String link = "jdbc:sqlite:Database.db";
+        try (Connection con = DriverManager.getConnection(link);
+             Statement stmt = con.createStatement()) {
+            stmt.execute("DELETE FROM Pegawai;");
+            stmt.execute("DELETE FROM sqlite_sequence WHERE name='Pegawai';");
+            System.out.println("Data Pegawai dan AUTOINCREMENT berhasil direset.");
+        } catch (SQLException e) {
+            System.out.println("Error reset AUTOINCREMENT: " + e.getMessage());
+        }
+    }
 }
