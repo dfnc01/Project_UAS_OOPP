@@ -1,7 +1,5 @@
 package Class;
 
-import Interfaces.*;
-import java.sql.*;
 import java.time.LocalDate;
 
 public class Pengajar extends Pegawai{
@@ -69,28 +67,5 @@ public class Pengajar extends Pegawai{
         super.setTanggal_Masuk(tanggal_Masuk);
     }
 
-    @Override
-    public String getProfesi(int id_Pegawai){
-        String Url ="jdbc:sqlite:DataBase.db";
-        String sql = "SELECT Profesi FROM Pegawai WHERE idPegawai = ?";
-        try(Connection conn = DriverManager.getConnection(Url); PreparedStatement prstm = conn.prepareStatement(sql)){
-            prstm.setInt(1,id_Pegawai);
-            ResultSet rs = prstm.executeQuery();
-            if(rs.next()){
-                if(rs.getString("profesi").equals("Guru PNS")) {
-                    return String.valueOf(hitungGaji.hitungGaji_guruPNS(getTanggal_Masuk()) + hitungTunjangan.hitungTunjangan_guruPNS(getTanggal_Masuk()));
-                } else if(rs.getString("profesi").equals("Guru Honorer")) {
-                    return String.valueOf(hitungGaji.hitungGaji_guruHonorer(getTanggal_Masuk()) + hitungTunjangan.hitungTunjangan_guruHonorer(getTanggal_Masuk()));
-                }else {
-                    return "Id Pegawai tidak ditemukan atau jenis profesi tidak valid.";
-                }
-            }else {
-                return null;
-            }
-        }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
-            return null;
-        }
-    }
 
 }

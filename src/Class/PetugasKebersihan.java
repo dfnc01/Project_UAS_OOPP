@@ -1,60 +1,94 @@
 package Class;
 
 import Interfaces.*;
-import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 public class PetugasKebersihan extends Kebersihan implements hitungGaji {
     public PetugasKebersihan(String nama, String no_Tlp, String e_mail, int id_Pegawai, String jenisPekerjaan, LocalDate tanggal_Masuk) {
         super(nama, no_Tlp, e_mail, id_Pegawai, jenisPekerjaan, "Petugas Kebersihan",  tanggal_Masuk);
     }
 
-    public double totalGajiPetugasKebersihan(){
-        return hitungGaji.hitungGaji_petugasKebersihan(getTanggal_Masuk()) * hitungTunjangan.hitungTunjangan_petugasKebersihan(getTanggal_Masuk());
-    }
-
     public PetugasKebersihan() {
         super("", "", "", 0, "", "Petugas Kebersihan", LocalDate.now());
     }
-    
-    public static List<PetugasKebersihan> getListPetugasKebersihan() {
-        List<PetugasKebersihan> listPetugasKebersihan = new ArrayList<>();
+
+    public static void ListAdminPetugasKebersihan() {
         String link = "jdbc:sqlite:Database.db";
-        String sql = "SELECT * FROM pegawai WHERE profesi = ?";
-        try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
+        String sql = "SELECT * FROM Pegawai WHERE profesi = ?";
+        try (java.sql.Connection con = java.sql.DriverManager.getConnection(link);
+             java.sql.PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Petugas Kebersihan");
-            ResultSet rs = prstm.executeQuery();
+            java.sql.ResultSet rs = prstm.executeQuery();
+            int count = 0;
             while (rs.next()) {
+                count++;
                 System.out.println("ID: " + rs.getInt("idPegawai"));
                 System.out.println("Nama: " + rs.getString("nama"));
                 System.out.println("No Telp: " + rs.getString("noTelp"));
                 System.out.println("Email: " + rs.getString("email"));
-                System.out.println("Tanggal Masuk: " + rs.getString("tanggalMasuk"));
+                String tanggalDb = rs.getString("tanggalMasuk");
+                LocalDate tanggalMasuk = LocalDate.parse(tanggalDb); 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                System.out.println("Tanggal Masuk: " + tanggalMasuk.format(formatter));
                 System.out.println("Profesi: " + rs.getString("profesi"));
-
-                System.out.println("----------------------");
+                System.out.println("===============================================================");
+            }
+            if (count == 0) {
+                System.out.println("Tidak ada data Petugas Kebersihan ditemukan di database.");
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.out.println("Error saat mengambil data Petugas Kebersihan: " + e.getMessage());
         }
-        return listPetugasKebersihan;
     }
-    public static void deletePetugasKebersihan(String profesi, int idPegawai) {
+
+    public static void ListUserPetugasKebersihan(int idPegawai, int jumlahHariMasuk) {
         String link = "jdbc:sqlite:Database.db";
-        String sql = "DELETE FROM pegawai WHERE profesi = ? AND idPegawai = ?";
-        try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
+        String sql = "SELECT * FROM Pegawai WHERE profesi = ? AND idPegawai = ?";
+        try (java.sql.Connection con = java.sql.DriverManager.getConnection(link);
+             java.sql.PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Petugas Kebersihan");
             prstm.setInt(2, idPegawai);
-            int rowsAffected = prstm.executeUpdate();
-            if (rowsAffected > 0) {
+            java.sql.ResultSet rs = prstm.executeQuery();
+            if (rs.next()) {
+                System.out.println("===============================================================");
+                System.out.println("ID: " + rs.getInt("idPegawai"));
+                System.out.println("Nama: " + rs.getString("nama"));
+                System.out.println("No Telp: " + rs.getString("noTelp"));
+                System.out.println("Email: " + rs.getString("email"));
+                System.out.println("Profesi: " + rs.getString("profesi"));
+                double gaji = Interfaces.hitungGaji.hitungGaji_petugasKebersihan();
+                double tunjangan = Interfaces.hitungTunjangan.hitungTunjangan_petugasKebersihan();
+                double uangMakan = Interfaces.hitungUangMakan.hitungTotalUangMakan(jumlahHariMasuk);
+                double totalGaji = gaji + tunjangan + uangMakan;
+                System.out.println("Gaji: " + FormatNominal.rupiah(gaji));
+                System.out.println("Tunjangan: " + FormatNominal.rupiah(tunjangan));
+                System.out.println("Uang Makan (" + jumlahHariMasuk + " hari): " + FormatNominal.rupiah(uangMakan));
+                System.out.println("Total Gaji: " + FormatNominal.rupiah(totalGaji));
+                System.out.println("===============================================================");
+            } else {
+                System.out.println("Data Petugas Kebersihan dengan ID " + idPegawai + " tidak ditemukan.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error saat mengambil data Petugas Kebersihan: " + e.getMessage());
+        }
+    }
+
+    public static void deletePetugasKebersihan(String profesi, int idPegawai) {
+        String link = "jdbc:sqlite:Database.db";
+        String sql = "DELETE FROM Pegawai WHERE profesi = ? AND idPegawai = ?";
+        try (java.sql.Connection con = java.sql.DriverManager.getConnection(link);
+             java.sql.PreparedStatement prstm = con.prepareStatement(sql)) {
+            prstm.setString(1, profesi);
+            prstm.setInt(2, idPegawai);
+            int affectedRows = prstm.executeUpdate();
+            if (affectedRows > 0) {
                 System.out.println("Data Petugas Kebersihan dengan ID " + idPegawai + " berhasil dihapus.");
             } else {
-                System.out.println("Tidak ada data Petugas Kebersihan dengan ID " + idPegawai + ".");
+                System.out.println("Data Petugas Kebersihan dengan ID " + idPegawai + " tidak ditemukan.");
             }
-        } catch (SQLException e) {
-            System.out.println("Error saat menghapus data Petugas Kebersihan : " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error saat menghapus data Petugas Kebersihan: " + e.getMessage());
         }
     }
 }

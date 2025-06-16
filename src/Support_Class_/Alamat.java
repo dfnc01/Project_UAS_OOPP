@@ -1,6 +1,6 @@
 package Support_Class_;
 
-public class Alamat {
+public abstract class Alamat {
     String Jalan, Kecamatan, Kota, Provinsi ;
     int No_Jalan ;
 

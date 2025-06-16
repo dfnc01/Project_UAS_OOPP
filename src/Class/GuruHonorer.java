@@ -1,10 +1,8 @@
 package Class;
 
 import Interfaces.*;
-import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 
 public class GuruHonorer extends Pengajar implements hitungGaji {
@@ -16,61 +14,84 @@ public class GuruHonorer extends Pengajar implements hitungGaji {
         super("", "", "", 0, "", "Guru Honorer", LocalDate.now());
     }
 
-    public static List<GuruHonorer> getListGuruHonorer() {
-        List<GuruHonorer> listGuruHonorer = new ArrayList<>();
+    public static void ListAdminGuruHonorer() {
         String link = "jdbc:sqlite:Database.db";
-        String sql = "SELECT * FROM pegawai WHERE profesi = ?";
-        try (Connection con = DriverManager.getConnection(link); 
-        PreparedStatement prstm = con.prepareStatement(sql)) {
+        String sql = "SELECT * FROM Pegawai WHERE profesi = ?";
+        try (java.sql.Connection con = java.sql.DriverManager.getConnection(link);
+             java.sql.PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Guru Honorer");
-            ResultSet rs = prstm.executeQuery();
+            java.sql.ResultSet rs = prstm.executeQuery();
             int count = 0;
             while (rs.next()) {
                 count++;
+                System.out.println("===============================================================");
                 System.out.println("ID: " + rs.getInt("idPegawai"));
                 System.out.println("Nama: " + rs.getString("nama"));
                 System.out.println("No Telp: " + rs.getString("noTelp"));
                 System.out.println("Email: " + rs.getString("email"));
-                System.out.println("Tanggal Masuk: " + LocalDate.parse( rs.getString("tanggalMasuk")));
+                String tanggalDb = rs.getString("tanggalMasuk");
+                LocalDate tanggalMasuk = LocalDate.parse(tanggalDb); 
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                System.out.println("Tanggal Masuk: " + tanggalMasuk.format(formatter));
                 System.out.println("Profesi: " + rs.getString("profesi"));
                 System.out.println("===============================================================");
-
-                GuruHonorer guru = new GuruHonorer(
-                        rs.getString("nama"),
-                        rs.getString("noTelp"),
-                        rs.getString("email"),
-                        rs.getInt("idPegawai"),
-                        rs.getString("profesi"),
-                        LocalDate.parse(rs.getString("tanggalMasuk"))
-                );
-                listGuruHonorer.add(guru);
             }
-            System.out.println("Jumlah data Guru Honorer: " + count);
             if (count == 0) {
                 System.out.println("Tidak ada data Guru Honorer ditemukan di database.");
             }
         } catch (Exception e) {
             System.out.println("Error saat mengambil data Guru Honorer: " + e.getMessage());
         }
-        return listGuruHonorer;
     }
 
-    public static GuruHonorer deleteGuruHonorer(int idPegawai) {
+    public static void ListUserGuruHonorer(int idPegawai, int jumlahHariMasuk) {
         String link = "jdbc:sqlite:Database.db";
-        String sql = "DELETE FROM pegawai WHERE profesi = ? AND idPegawai = ?";
-        try (Connection con = DriverManager.getConnection(link); PreparedStatement prstm = con.prepareStatement(sql)) {
+        String sql = "SELECT * FROM Pegawai WHERE profesi = ? AND idPegawai = ?";
+        try (java.sql.Connection con = java.sql.DriverManager.getConnection(link);
+             java.sql.PreparedStatement prstm = con.prepareStatement(sql)) {
             prstm.setString(1, "Guru Honorer");
             prstm.setInt(2, idPegawai);
-            int rowsAffected = prstm.executeUpdate();
-            if (rowsAffected > 0) {
+            java.sql.ResultSet rs = prstm.executeQuery();
+            if (rs.next()) {
+                System.out.println("===============================================================");
+                System.out.println("ID: " + rs.getInt("idPegawai"));
+                System.out.println("Nama: " + rs.getString("nama"));
+                System.out.println("No Telp: " + rs.getString("noTelp"));
+                System.out.println("Email: " + rs.getString("email"));
+                System.out.println("Profesi: " + rs.getString("profesi"));
+                double gaji = Interfaces.hitungGaji.gajiPerhari_guruHonorer * jumlahHariMasuk;
+                double tunjangan = Interfaces.hitungTunjangan.hitungTunjangan_guruHonorer();
+                double uangMakan = Interfaces.hitungUangMakan.hitungTotalUangMakan(jumlahHariMasuk);
+                double totalGaji = gaji + tunjangan + uangMakan;
+                System.out.println("Gaji: " + FormatNominal.rupiah(gaji));
+                System.out.println("Tunjangan: " + FormatNominal.rupiah(tunjangan));
+                System.out.println("Uang Makan (" + jumlahHariMasuk + " hari): " + FormatNominal.rupiah(uangMakan));
+                System.out.println("Total Gaji: " + FormatNominal.rupiah(totalGaji));
+                System.out.println("===============================================================");
+            } else {
+                System.out.println("Data Guru Honorer dengan ID " + idPegawai + " tidak ditemukan.");
+            }
+        } catch (Exception e) {
+            System.out.println("Error saat mengambil data Guru Honorer: " + e.getMessage());
+        }
+    }
+
+    public static void deleteGuruHonorer(int idPegawai) {
+        String link = "jdbc:sqlite:Database.db";
+        String sql = "DELETE FROM Pegawai WHERE profesi = ? AND idPegawai = ?";
+        try (java.sql.Connection con = java.sql.DriverManager.getConnection(link);
+             java.sql.PreparedStatement prstm = con.prepareStatement(sql)) {
+            prstm.setString(1, "Guru Honorer");
+            prstm.setInt(2, idPegawai);
+            int affectedRows = prstm.executeUpdate();
+            if (affectedRows > 0) {
                 System.out.println("Data Guru Honorer dengan ID " + idPegawai + " berhasil dihapus.");
             } else {
-                System.out.println("Tidak ada data Guru Honorer dengan ID " + idPegawai + ".");
+                System.out.println("Data Guru Honorer dengan ID " + idPegawai + " tidak ditemukan.");
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Error saat menghapus data Guru Honorer: " + e.getMessage());
         }
-        return null;
     }
 }
 

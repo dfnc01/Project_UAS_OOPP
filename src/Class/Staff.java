@@ -1,8 +1,5 @@
 package Class;
 
-import Interfaces.hitungGaji;
-import Interfaces.hitungTunjangan;
-import java.sql.*;
 import java.time.LocalDate;
 
 public class Staff extends Pegawai {
@@ -70,27 +67,4 @@ public class Staff extends Pegawai {
         super.setTanggal_Masuk(tanggal_Masuk);
     }
 
-    @Override
-    public String getProfesi(int id_Pegawai) {
-        String Url ="jdbc:sqlite:DataBase.db";
-        String sql = "SELECT Profesi FROM Pegawai WHERE idPegawai = ?";
-        try(Connection conn = DriverManager.getConnection(Url); PreparedStatement prstm = conn.prepareStatement(sql)){
-            prstm.setInt(1,id_Pegawai);
-            ResultSet rs = prstm.executeQuery();
-            if(rs.next()){
-                if(rs.getString("profesi").equals("Tata Usaha")) {
-                    return String.valueOf(hitungGaji.hitungGaji_tataUsaha(getTanggal_Masuk()) + hitungTunjangan.hitungTunjangan_tataUsaha(getTanggal_Masuk()));
-                } else if(rs.getString("profesi").equals("Petugas Perpustakaan")) {
-                    return String.valueOf(hitungGaji.hitungGaji_petugasPerpus(getTanggal_Masuk()) + hitungTunjangan.hitungTunjangan_petugasPerpus(getTanggal_Masuk()));
-                }else {
-                    return null;
-                }
-            }else {
-                return null;
-            }
-        }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
-            return null;
-        }
-    }
 }
