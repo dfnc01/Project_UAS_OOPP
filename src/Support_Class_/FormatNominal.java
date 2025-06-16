@@ -1,4 +1,4 @@
-package Class;
+package Support_Class_;
 
 import java.text.NumberFormat;
 import java.util.Locale;

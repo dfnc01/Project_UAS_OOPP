@@ -1,6 +1,7 @@
+package Support_Class_;
 import Class.*;
 import Database.*;
-import Support_Class_.*;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -62,6 +63,8 @@ public class Main  {
                             System.out.println("Format tanggal salah. Silakan masukkan ulang (format: DD-MM-YYYY): ");
                         }
                     }
+
+//simpan
 
                     Pegawai inputDataBaru = new Pegawai(nama, noTlp, email, 0, profesi, profesi, tanggalMasuk);
                     InputDB.simpanData(inputDataBaru);
