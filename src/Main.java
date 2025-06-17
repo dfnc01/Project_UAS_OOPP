@@ -1,12 +1,11 @@
-package Support_Class_;
 import Class.*;
 import Database.*;
-
+import Support_Class_.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class Main  {
     public static void admin(Scanner sc){
@@ -237,13 +236,14 @@ public class Main  {
         Alamat alamat = new AlamatSekolah("Gajayana ", 50, "Lowokwaru ", "Malang ", "Jawa Timur\n");
         System.out.print("\nAlamat: ");
         alamat.TampilkanAlamat();
+        boolean loginSukses = false;
 
+        do{
         Scanner scanner = new Scanner(System.in);
         System.out.print("Masukkan username: ");
         String username = scanner.nextLine().trim();
         System.out.print("Masukkan password: ");
         String password = scanner.nextLine().trim();
-        boolean loginSukses = false;
 
         try (BufferedReader br = new BufferedReader(
                 new FileReader("src/Database/username.txt"))) {
@@ -255,20 +255,24 @@ public class Main  {
                     String filePassword = parts[1].trim();
                     if (username.equals(fileUsername) && password.equals(filePassword)) {
                         loginSukses = true;
+                        if (fileUsername.equals("admin")) {
+                            admin(sc);
+                        } else if (fileUsername.equals("user")) {
+                            user(sc);
+                        }
                         break;
                     }
                 }
             }
+            if (!loginSukses) {
+                System.out.println("Username atau password salah!");
+                 loginSukses = true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        if (loginSukses) {
-            admin(sc);
-        } else {
-            user(sc);
-        }
-
+    }while (!loginSukses) ;
+       
         sc.close();
     }
 

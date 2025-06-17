@@ -42,14 +42,5 @@ public class Create_Connect {
         return connection;
     }
 
-    public static void resetAutoIncrement() {
-        try (Connection con = DriverManager.getConnection(DATABASE_URL);
-             Statement stmt = con.createStatement()) {
-            stmt.execute("DELETE FROM Pegawai;");
-            stmt.execute("DELETE FROM sqlite_sequence WHERE name='Pegawai';");
-            System.out.println("Data Pegawai dan AUTOINCREMENT berhasil direset.");
-        } catch (SQLException e) {
-            System.out.println("Error reset AUTOINCREMENT: " + e.getMessage());
-        }
-    }
+
 }

@@ -1,9 +1,9 @@
 package Interfaces;
 
-public class hitungUangMakan {
+public interface hitungUangMakan {
     public static final double uangMakanPerHari = 25000;
 
-    public static double hitungTotalUangMakan(int jumlahHariMasuk) {
+    static double hitungTotalUangMakan(int jumlahHariMasuk) {
         return uangMakanPerHari * jumlahHariMasuk;
     }
 }
